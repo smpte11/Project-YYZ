@@ -1,0 +1,97 @@
+{
+  "//": {
+    "metadata": {
+      "backend": "cloud",
+      "cloud": "tfc",
+      "stackName": "project-yyz-infra",
+      "version": "0.19.2"
+    },
+    "outputs": {
+    }
+  },
+  "provider": {
+    "azurerm": [
+      {
+        "features": {
+        }
+      }
+    ]
+  },
+  "resource": {
+    "azurerm_linux_function_app": {
+      "function-project-yyz-infra": {
+        "//": {
+          "metadata": {
+            "path": "project-yyz-infra/function-project-yyz-infra",
+            "uniqueId": "function-project-yyz-infra"
+          }
+        },
+        "location": "${azurerm_resource_group.rg-project-yyz-infra.location}",
+        "name": "pyyz-backend",
+        "resource_group_name": "${azurerm_resource_group.rg-project-yyz-infra.name}",
+        "service_plan_id": "${azurerm_service_plan.sp-project-yyz-infra.id}",
+        "site_config": {
+        },
+        "storage_account_access_key": "${azurerm_storage_account.sa-project-yyz-infra.primary_access_key}",
+        "storage_account_name": "${azurerm_storage_account.sa-project-yyz-infra.name}"
+      }
+    },
+    "azurerm_resource_group": {
+      "rg-project-yyz-infra": {
+        "//": {
+          "metadata": {
+            "path": "project-yyz-infra/rg-project-yyz-infra",
+            "uniqueId": "rg-project-yyz-infra"
+          }
+        },
+        "location": "Sweden Central",
+        "name": "pyyz-resource-group"
+      }
+    },
+    "azurerm_service_plan": {
+      "sp-project-yyz-infra": {
+        "//": {
+          "metadata": {
+            "path": "project-yyz-infra/sp-project-yyz-infra",
+            "uniqueId": "sp-project-yyz-infra"
+          }
+        },
+        "location": "${azurerm_resource_group.rg-project-yyz-infra.location}",
+        "name": "pyyz-backend-sp",
+        "os_type": "Linux",
+        "resource_group_name": "${azurerm_resource_group.rg-project-yyz-infra.name}",
+        "sku_name": "Y1"
+      }
+    },
+    "azurerm_storage_account": {
+      "sa-project-yyz-infra": {
+        "//": {
+          "metadata": {
+            "path": "project-yyz-infra/sa-project-yyz-infra",
+            "uniqueId": "sa-project-yyz-infra"
+          }
+        },
+        "account_replication_type": "LRS",
+        "account_tier": "Standard",
+        "location": "${azurerm_resource_group.rg-project-yyz-infra.location}",
+        "name": "pyyz",
+        "resource_group_name": "${azurerm_resource_group.rg-project-yyz-infra.name}"
+      }
+    }
+  },
+  "terraform": {
+    "cloud": {
+      "hostname": "app.terraform.io",
+      "organization": "smpte11",
+      "workspaces": {
+        "name": "Project-YYZ"
+      }
+    },
+    "required_providers": {
+      "azurerm": {
+        "source": "azurerm",
+        "version": "3.83.0"
+      }
+    }
+  }
+}

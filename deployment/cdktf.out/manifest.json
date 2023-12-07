@@ -1,0 +1,13 @@
+{
+  "version": "0.19.2",
+  "stacks": {
+    "project-yyz-infra": {
+      "name": "project-yyz-infra",
+      "constructPath": "project-yyz-infra",
+      "workingDirectory": "stacks/project-yyz-infra",
+      "synthesizedStackPath": "stacks/project-yyz-infra/cdk.tf.json",
+      "annotations": [],
+      "dependencies": []
+    }
+  }
+}
