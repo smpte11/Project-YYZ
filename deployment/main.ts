@@ -1,5 +1,5 @@
 import { Construct } from "constructs";
-import { App, TerraformStack, CloudBackend, NamedCloudWorkspace } from "cdktf";
+import { App, TerraformStack, AzurermBackend } from "cdktf";
 import {
   linuxFunctionApp,
   resourceGroup,
@@ -63,9 +63,10 @@ class MyStack extends TerraformStack {
 
 const app = new App();
 const stack = new MyStack(app, PROJECT_YYZ_INFRA);
-new CloudBackend(stack, {
-  hostname: "app.terraform.io",
-  organization: "smpte11",
-  workspaces: new NamedCloudWorkspace("Project-YYZ"),
+new AzurermBackend(stack, {
+  resourceGroupName: "tfstate",
+  storageAccountName: "tfstate30637",
+  containerName: "tfstate",
+  key: "terraform.tfstate",
 });
 app.synth();
