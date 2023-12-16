@@ -11,7 +11,7 @@ yarn-error.log*
 *.tsbuildinfo
 .npm
 .eslintcache
-.cdktf.out
+cdktf.out
 
 # nix
 result

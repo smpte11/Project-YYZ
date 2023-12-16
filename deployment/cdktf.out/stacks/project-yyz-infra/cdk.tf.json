@@ -1,8 +1,7 @@
 {
   "//": {
     "metadata": {
-      "backend": "cloud",
-      "cloud": "tfc",
+      "backend": "azurerm",
       "stackName": "project-yyz-infra",
       "version": "0.19.2"
     },
@@ -80,11 +79,12 @@
     }
   },
   "terraform": {
-    "cloud": {
-      "hostname": "app.terraform.io",
-      "organization": "smpte11",
-      "workspaces": {
-        "name": "Project-YYZ"
+    "backend": {
+      "azurerm": {
+        "container_name": "tfstate",
+        "key": "terraform.tfstate",
+        "resource_group_name": "tfstate",
+        "storage_account_name": "tfstate30637"
       }
     },
     "required_providers": {
