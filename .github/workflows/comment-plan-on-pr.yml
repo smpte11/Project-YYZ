@@ -1,14 +1,14 @@
-name: Synth CDKTF Plan
-run-name: ${{ github.actor }} is learning GitHub Actions
-on: pull_request
+name: "Comment a Plan on a PR"
+
+on: [pull_request]
 
 permissions:
   contents: read
   pull-requests: write
 
 jobs:
-  terraform:
-    name: "Terraform CDK Synth"
+  terraform-plan:
+    name: "Terraform CDK Diff"
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -19,21 +19,25 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-versions: 20
+          node-version: 20
 
       - name: Install dependencies
-        run: npm install
+        run: yarn install
 
       - name: Generate module and provider bindings
-        run: npx cdktf-cli get
+        run: npx cdktf-cli get -l typescript
 
-      - name: Test synth
+      - name: Run Terraform CDK
         uses: hashicorp/terraform-cdk-action@v1
+        env:
+          ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+          ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+          ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+          ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
         with:
           cdktfVersion: 0.19.2
           terraformVersion: 1.6.5
-          mode: synth-only
+          mode: plan-only
           stackName: project-yyz-infra
-          terraformCloudToken: ${{ secrets.TF_CLOUD_TOKEN }}
           githubToken: ${{ secrets.GITHUB_TOKEN }}
           workingDirectory: ./deployment
